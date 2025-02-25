@@ -24,4 +24,11 @@ public class UserController {
     public void changePassword(@Auth AuthUser authUser, @RequestBody UserChangePasswordRequest userChangePasswordRequest) {
         userService.changePassword(authUser.getId(), userChangePasswordRequest);
     }
+
+    @PostMapping("/users/change-password")
+    public ResponseEntity<Void> changePassword(@RequestParam long userId,
+                                               @Valid @RequestBody UserChangePasswordRequest request) {
+        userService.changePassword(userId, request);
+        return ResponseEntity.ok().build();
+    }
 }
