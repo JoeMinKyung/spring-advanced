@@ -43,9 +43,10 @@ class CommentServiceTest {
         given(todoRepository.findById(anyLong())).willReturn(Optional.empty());
 
         // when
-        ServerException exception = assertThrows(ServerException.class, () -> {
-            commentService.saveComment(authUser, todoId, request);
-        });
+        InvalidRequestException exception = assertThrows(
+                InvalidRequestException.class,
+                () -> commentService.saveComment(authUser, todoId, request)
+        );
 
         // then
         assertEquals("Todo not found", exception.getMessage());
